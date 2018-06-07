@@ -13,13 +13,7 @@ $column-width: ($grid-width / $columns) - $gutter-width;
     width: $grid-width;
     padding: 20px;
     margin: auto;
-}
-
-@for $i from 1 through 12 {
-    .col-#{$i} {
-        flex: (100 / ($columns / $i)) * 1%;
-        max-width: (100 / ($columns / $i)) * 1%;
-    }
+    background: green;
 }
 
 .row {
@@ -27,6 +21,11 @@ $column-width: ($grid-width / $columns) - $gutter-width;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    background: red;
+}
+
+[class*="col-"]{
+    background: blue;
 }
 
 @mixin resize($width) {
@@ -35,26 +34,34 @@ $column-width: ($grid-width / $columns) - $gutter-width;
     }
 }
 
+@mixin collapse($size){
+    [class*="collapse"]{
+        flex: $size;
+        max-width: $size;
+    }
+}
+
+
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        flex: (100 / ($columns / $i)) * 1%;
+        max-width: (100 / ($columns / $i)) * 1%;
+    }
+}
+
+@media screen and (max-width: 999px){
+
+    @for $i from 1 through 12 {
+        .col-sm-#{$i}  {
+            flex: (100 / ($columns / $i)) * 1%;
+            max-width: (100 / ($columns / $i)) * 1%;
+        }
+    }
+
+}
+
 @media screen and (min-width: 1100px) { @include resize(1100px) }
 @media screen and (max-width: 1099px) { @include resize(800px) }
-@media screen and (max-width: 800px ) { @include resize(100vw) }
-
-@media screen and (max-width: 600px ){
-
-    @for $i from 1 through 12 {
-        .col-sm-#{$i} {
-            flex: 50%;
-            max-width: 50%;
-        }
-    }
-
-}
-
-@media screen and ( max-width: 400px ){
-    @for $i from 1 through 12 {
-        .col-sm-#{$i} {
-            flex: 100%;
-            max-width: 100%;
-        }
-    }
-}
+@media screen and (max-width: 800px) { @include resize(100vw) }
+@media screen and (max-width: 600px) { @include collapse(50%) }
+@media screen and (max-width: 400px) { @include collapse(100%) }
