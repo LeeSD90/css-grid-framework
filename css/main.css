@@ -48,19 +48,15 @@ table {
 
 .container {
   width: 100vw;
-  padding: 20px;
-  margin: auto;
-  background: green; }
+  padding: 0 20px;
+  margin: auto; }
 
 .row {
   margin: 0 0 2.5vw 0;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  background: red; }
-
-[class*="col-"] {
-  background: blue; }
+  justify-content: space-between; }
 
 .col-1 {
   flex: 8.3333333333%;
