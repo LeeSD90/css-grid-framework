@@ -1,4 +1,38 @@
 @import 'reset';
 
+$grid-width: 1100px;
+$columns: 12;
+$gutter-width: ($grid-width / $columns) * .3;
+$column-width: ($grid-width / $columns) - $gutter-width;
 
+* {
+    box-sizing: border-box;
+}
 
+.container {
+    width: $grid-width;
+    padding: 20px;
+    margin: auto;
+}
+
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        flex-basis: (100 / ($columns / $i)) * 1%;
+    }
+}
+
+.row {
+    margin: 0 0 $gutter-width 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@mixin resize($width) {
+    .container {
+        width: $width;
+    }
+}
+
+@media screen and (min-width: 1100px) { @include resize(1100px) }
+@media screen and (max-width: 1099px) { @include resize(100vw) }
